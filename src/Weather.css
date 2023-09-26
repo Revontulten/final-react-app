@@ -1,6 +1,27 @@
 .Weather {
   border: 1px solid darkgrey;
+  padding: 16px;
+  margin: 30px auto;
+  border-radius: 5px;
+ 
+}
+.Weather form {
 }
 .Weather h1 {
-  color: #878787;
+  color: #70757a;
+  line-height: 16px;
+  padding-left: 9px;
+  margin: 17px 4px 4px 0;
+}
+
+.Weather ul {
+  margin: 0;
+  padding: 0;
+}
+.Weather li {
+  list-style-type: none;
+  color: #70757a;
+  line-height: 16px;
+  padding-left: 9px;
+  padding-top: 6px;
 }
