@@ -2,17 +2,25 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 
-export default function Weather() {
-  const [ready, setReady] = useState(false);
-  const [temperature, setTemperature] = useState(null);
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  // const [city, setCity] = useState("");
 
   function handleResponse(response) {
     console.log(response.data);
-    setTemperature(response.data.main.temp);
-    setReady(true);
+    setWeatherData({
+      ready: true,
+      temperature: response.data.main.temp,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      description: response.data.weather[0].description,
+      iconUrl: response.data.weather[0].icon,
+      city: response.data.name,
+      date: "Wednesday, 13:00",
+    });
   }
 
-  if (ready) {
+  if (weatherData.ready) {
     return (
       <div className="Weather">
         <form>
@@ -35,28 +43,26 @@ export default function Weather() {
           </div>
         </form>
 
-        <h1>{city}</h1>
+        <h1>{weatherData.city}</h1>
         <ul>
-          <li>Wednesday, 07:00</li>
-          <li>{description}</li>
+          <li>{weatherData.date}</li>
+          <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row nt-3">
           <div className="col-6">
             <div className="clearfix">
-              <img
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt="Partly Cloudy"
-              />
+              <img src={weatherData.iconUrl} alt={weatherData.description} />
 
-              <span className="temperature">{Math.round(temperature)}</span>
+              <span className="temperature">
+                {Math.round(weatherData.temperature)}
+              </span>
               <span className="unit">°C</span>
             </div>
           </div>
           <div className="col-6">
             <ul>
-              <li>Precipitation: {precipitation}%</li>
-              <li>Humidity: {humidity}%</li>
-              <li>Wind:{wind} km/h</li>
+              <li>Humidity: {Math.round(weatherData.humidity)}%</li>
+              <li>Wind:{Math.round(weatherData.wind)} km/h</li>
             </ul>
           </div>
         </div>
@@ -64,8 +70,8 @@ export default function Weather() {
     );
   } else {
     const apiKey = "094780c710fa4efd669f0df8c3991927";
-    let city = "Carlow";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
 
     axios.get(apiUrl).then(handleResponse);
 
