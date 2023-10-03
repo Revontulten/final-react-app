@@ -1,0 +1,12 @@
+.WeatherForecast {
+  text-align: center;
+}
+.WeatherForecast-day {
+  font-weight: bold;
+}
+.WeatherForecast-temp-max {
+  font-weight: bold;
+}
+.WeatherForecast-temp-min {
+  color: grey;
+}
