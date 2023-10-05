@@ -10,3 +10,6 @@
 .WeatherForecast-temp-min {
   color: grey;
 }
+.WeatherForecast-icon {
+  margin: 0;
+}
