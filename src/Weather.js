@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
-
+//import WeatherIcon from "./WeatherIcon";
 import axios from "axios";
 
 export default function Weather(props) {
@@ -13,11 +13,12 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
+      coordinates: response.data.coord,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
-      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      icon: response.data.weather[0].icon,
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
     });

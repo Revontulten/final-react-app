@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 //import WeatherInfo from "./WeatherInfo";
 import "./WeatherForecast.css";
+import WeatherIcon from "./WeatherIcon";
 import axios from "axios";
 
-export default function WeatherForecast() {
+export default function WeatherForecast(props) {
   let [loaded, setLoaded] = useState(false);
   let [forecast, setForecast] = useState(null);
+
   function handleResponse(response) {
     setForecast(response.data.daily);
     setLoaded(true);
@@ -16,30 +18,32 @@ export default function WeatherForecast() {
       <div className="WeatherForecast">
         <div className="row">
           <div className="col">
-            <div className="WeatherForecast-day">Mon</div>
+            <div className="WeatherForecast-day">{forecast[0].dt}</div>
             <div className="WeatherForecast-icon">
-              <img
-                src="https://openweathermap.org/img/wn/10d@2x.png"
-                alt=""
-                width="36"
-              />
+              <WeatherIcon code={forecast[0].weather[0].icon} size={36} />
             </div>
             <div className="WeatherForecast-temp">
               <span className="WeatherForecast-temp-max">
-                {Math.round(forecast[0].temperature.maximum)}°{" "}
+                {Math.round(forecast[0].temp.max)}°{" "}
               </span>
-              <span className="WeatherForecast-temp-min">10°</span>
+              <span className="WeatherForecast-temp-min">
+                {" "}
+                {Math.round(forecast[0].temp.min)}°
+              </span>
             </div>
           </div>
         </div>
       </div>
     );
   } else {
-    let apiKey = "649131ffb5104af63a3o00f6aa84e7t1";
-    let city = "Kilkenny";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+    let apiKey = "094780c710fa4efd669f0df8c3991927";
+    //let city = "Kilkenny"; =
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
     axios.get(apiUrl).then(handleResponse);
+
     return null;
   }
 }
