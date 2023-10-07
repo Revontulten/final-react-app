@@ -34,7 +34,8 @@
   color: black;
   font-size: 60px;
   font-weight: 400;
-  line-height: 64px;
+  line-height: 60px;
+  display: inline-block;
 }
 .Weather .unit {
   color: black;
@@ -45,4 +46,14 @@
 .Weather .clearfix {
   margin-top: 10px;
   display: inline-flex;
+}
+@media (max-width: 447px) {
+  .Weather .temperature {
+    font-size: 35px;
+  }
+}
+@media (max-width: 388px) {
+  .WeatherTemp {
+    display: inline-block;
+  }
 }
