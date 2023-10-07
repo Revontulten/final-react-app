@@ -6,10 +6,10 @@
 }
 
 .Weather h1 {
-  color: #70757a;
+  color: #575b5f;
   line-height: 16px;
   padding-left: 9px;
-  margin: 17px 4px 4px 0;
+  margin: 22px 4px 4px 0;
 }
 
 .Weather ul {
@@ -18,7 +18,7 @@
 }
 .Weather li {
   list-style-type: none;
-  color: #70757a;
+  color: #575b5f;
   line-height: 16px;
   padding-left: 9px;
   padding-top: 6px;
@@ -52,7 +52,7 @@
     font-size: 35px;
   }
 }
-@media (max-width: 388px) {
+@media (max-width: 409px) {
   .WeatherTemp {
     display: inline-block;
   }
